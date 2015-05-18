@@ -436,7 +436,11 @@ define([
             distance = distanceMeasure - maxHeight;
         }
 
-        object._scene.camera.zoomIn(distance);
+        var camera = object._scene.camera;
+        var currentMousePosition = object._aggregator.currentMousePosition;
+        var ray = camera.getPickRay(currentMousePosition);
+
+        camera.zoomIn(distance, ray.direction);
     }
 
     var translate2DStart = new Ray();

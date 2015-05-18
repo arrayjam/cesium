@@ -1410,8 +1410,8 @@ define([
         frustum.bottom = -frustum.top;
     }
 
-    function zoom3D(camera, amount) {
-        camera.move(camera.direction, amount);
+    function zoom3D(camera, amount, direction) {
+        camera.move(direction, amount);
     }
 
     /**
@@ -1421,12 +1421,12 @@ define([
      *
      * @see Camera#zoomOut
      */
-    Camera.prototype.zoomIn = function(amount) {
+    Camera.prototype.zoomIn = function(amount, direction) {
         amount = defaultValue(amount, this.defaultZoomAmount);
         if (this._mode === SceneMode.SCENE2D) {
             zoom2D(this, amount);
         } else {
-            zoom3D(this, amount);
+            zoom3D(this, amount, direction);
         }
     };
 
@@ -1438,12 +1438,12 @@ define([
      *
      * @see Camera#zoomIn
      */
-    Camera.prototype.zoomOut = function(amount) {
+    Camera.prototype.zoomOut = function(amount, direction) {
         amount = defaultValue(amount, this.defaultZoomAmount);
         if (this._mode === SceneMode.SCENE2D) {
             zoom2D(this, -amount);
         } else {
-            zoom3D(this, -amount);
+            zoom3D(this, -amount, direction);
         }
     };
 
